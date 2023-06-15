@@ -14,7 +14,7 @@ def readAll():
 
 
 def searchByName(nome):
-    return collection.find({"nome": nome})
+    return collection.find({"nome": {"$regex": nome, "$options": "i"}})
 
 
 def searchByCode(codigo):
@@ -23,6 +23,9 @@ def searchByCode(codigo):
 
 def updateProduto(produto):
     collection.update_one({'codigo': produto.codigo}, {"$set": {produto}})
+
+def updatePreco(codigo, preco):
+    collection.update_one({'codigo':codigo}, {"$set":{'preco':preco}})
 
 
 def updateQuant(codigo, quantidade):
