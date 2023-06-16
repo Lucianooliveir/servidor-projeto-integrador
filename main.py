@@ -5,7 +5,7 @@ from bson import json_util
 import json
 import requests
 
-key = "s15i4haqdp7phgz3zwa708cx3kdhfs"
+key = ""
 
 app = Flask(__name__)
 
@@ -28,8 +28,10 @@ def receberProduto():
         prod = requests.get(f'https://api.barcodelookup.com/v3/products?barcode={data}&formatted=y&key={key}')
         if prod.status_code == 404:
             return "produto nao encontrado"
-        else: 
+        else:
+            print(prod.status_code)
             prod_dict = prod.json()
+            print(prod_dict)
             prod_dict = prod_dict.get('products')[0]
             product = produto(int(data),1,0.00,prod_dict.get('title'),prod_dict.get('description'))
             db.createProduct(produto=product)
@@ -45,7 +47,7 @@ def saidaProduto():
         prod = requests.get(f'https://api.barcodelookup.com/v3/products?barcode={data}&formatted=y&key={key}')
         if prod.status_code == 404:
             return "produto nao encontrado"
-        else: 
+        else:
             prod_dict = prod.json()
             prod_dict = prod_dict.get('products')[0]
             product = produto(int(data),1,0.00,prod_dict.get('title'),prod_dict.get('description'))

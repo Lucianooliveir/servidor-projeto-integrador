@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-cluster = MongoClient('mongodb+srv://eunaoseicara4:Ti93VW0n4lcIu8ak@cluster0.fxbb6oi.mongodb.net/?retryWrites=true&w=majority')
+cluster = MongoClient('mongodb://127.0.0.1:27017/')
 db = cluster['projetoIntegrador']
 collection = db['produtos']
 
